@@ -1,67 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fotos con sonido y botón</title>
+<style>
+    body {
+        margin: 0;
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden; /* evita que se desplace en móviles */
+        flex-direction: column;
+        position: relative;
+    }
 
-    <style>
-        body {
-            margin: 0;
-            background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
+    img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover; /* ajusta la imagen a toda la pantalla */
+    }
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        #mainBtn {
-            background: white;
-        }
-    </style>
+    button {
+        position: absolute;
+        padding: 12px 25px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    #mainBtn {
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+    }
+
+    #extraBtn {
+        bottom: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: red;
+        color: white;
+        display: none; /* oculto al inicio */
+    }
+</style>
 </head>
 <body>
-    <img id="foto" src="bang_tres.png" alt="Foto">
 
-    <button id="mainBtn" onclick="cambiarFoto()">bang!</button>
+<img id="foto" src="bang_tres.png" alt="Foto">
 
-    <button id="extraBtn" onclick="abrirLink()">bang!</button>
+<!-- Botón principal -->
+<button id="mainBtn" onclick="cambiarFoto()">bang!</button>
 
-    <audio id="sonido" src="bang.mp3"></audio>
+<!-- Botón extra -->
+<button id="extraBtn" onclick="abrirLink()">Ir al enlace</button>
 
-    <script>
-        var fotos = [
-            "bang_cero.jpg",
-            "bang_uno.png",
-            "bang_dos.png",
-            "bang_tres.png"
-        ];
+<audio id="sonido" src="bang.mp3"></audio>
 
-        var indice = -1;
+<script>
+    var fotos = [
+        "bang_cero.jpg",
+        "bang_uno.png",
+        "bang_dos.png",
+        "bang_tres.png"
+    ];
 
-        function cambiarFoto() {
-            indice = (indice + 1) % fotos.length;
-            document.getElementById("foto").src = fotos[indice];
+    var indice = -1;
 
-            if (indice === 1) {
-                let audio = document.getElementById("sonido");
-                audio.currentTime = 0;
-                audio.play();
+    function cambiarFoto() {
+        indice = (indice + 1) % fotos.length;
+        document.getElementById("foto").src = fotos[indice];
 
-                document.getElementById("extraBtn").style.display = "inline-block";
-            } else {
-                document.getElementById("extraBtn").style.display = "none";
-            }
+        // Reproduce el sonido en la segunda foto (índice 1)
+        if (indice === 1) {
+            let audio = document.getElementById("sonido");
+            audio.currentTime = 0;
+            audio.play();
+
+            // Mostrar botón extra
+            document.getElementById("extraBtn").style.display = "inline-block";
+        } else {
+            // Ocultar botón extra en otras fotos
+            document.getElementById("extraBtn").style.display = "none";
         }
+    }
 
-        function abrirLink() {
-            window.open("https://secreto.site/es/a0r5x7", "_blank");
-        }
-    </script>
+    function abrirLink() {
+        window.open("https://www.ejemplo.com", "_blank");
+    }
+</script>
+
 </body>
 </html>
