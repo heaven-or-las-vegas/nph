@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        #mainBtn {
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <img id="foto" src="bang_tres.png" alt="Foto">
+
+    <button id="mainBtn" onclick="cambiarFoto()">bang!</button>
+
+    <button id="extraBtn" onclick="abrirLink()">bang!</button>
+
+    <audio id="sonido" src="bang.mp3"></audio>
+
+    <script>
+        var fotos = [
+            "bang_cero.jpg",
+            "bang_uno.png",
+            "bang_dos.png",
+            "bang_tres.png"
+        ];
+
+        var indice = -1;
+
+        function cambiarFoto() {
+            indice = (indice + 1) % fotos.length;
+            document.getElementById("foto").src = fotos[indice];
+
+            if (indice === 1) {
+                let audio = document.getElementById("sonido");
+                audio.currentTime = 0;
+                audio.play();
+
+                document.getElementById("extraBtn").style.display = "inline-block";
+            } else {
+                document.getElementById("extraBtn").style.display = "none";
+            }
+        }
+
+        function abrirLink() {
+            window.open("https://secreto.site/es/a0r5x7", "_blank");
+        }
+    </script>
+</body>
+</html>
