@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+    
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,10 +55,10 @@
 <img id="foto" src="bang_tres.png" alt="Foto">
 
 <!-- Botón principal -->
-<button id="mainBtn" onclick="cambiarFoto()">bang!</button>
+<button id="mainBtn" onclick="cambiarFoto()">click</button>
 
 <!-- Botón extra -->
-<button id="extraBtn" onclick="abrirLink()">bang!</button>
+<button id="extraBtn" onclick="abrirLink()">click</button>
 
 <audio id="sonido" src="bang.mp3"></audio>
 
@@ -75,17 +76,25 @@
         indice = (indice + 1) % fotos.length;
         document.getElementById("foto").src = fotos[indice];
 
-        // Reproduce el sonido en la segunda foto (índice 1)
+        // Referencia al botón principal
+        let mainBtn = document.getElementById("mainBtn");
+
+        // Cambiar texto del botón según la foto
+        if (indice === 0) {
+            mainBtn.innerText = "bang!";   // 👈 en la segunda imagen
+        } else {
+            mainBtn.innerText = "click";  // 👈 en todas las demás
+        }
+
+        // Lógica del botón extra
+        let extraBtn = document.getElementById("extraBtn");
         if (indice === 1) {
             let audio = document.getElementById("sonido");
             audio.currentTime = 0;
             audio.play();
-
-            // Mostrar botón extra
-            document.getElementById("extraBtn").style.display = "inline-block";
+            extraBtn.style.display = "inline-block";
         } else {
-            // Ocultar botón extra en otras fotos
-            document.getElementById("extraBtn").style.display = "none";
+            extraBtn.style.display = "none";
         }
     }
 
